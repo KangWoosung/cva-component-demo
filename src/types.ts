@@ -1,5 +1,6 @@
 import type { VariantProps } from "class-variance-authority";
 import type { Simplify } from "type-fest";
+import { buttonVariants } from "./components/Buttons/buttonVariants";
 
 export type RequiredVariantProps<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,3 +14,27 @@ export type RequiredVariantProps<
     [Variant in Keys]: Exclude<VariantProps<T>[Variant], null | undefined>;
   }
 >;
+
+export type ButtonVariants = Omit<
+  RequiredVariantProps<typeof buttonVariants>,
+  "_content"
+>;
+
+export type SVGComponent = React.ComponentType<
+  React.SVGAttributes<SVGSVGElement>
+>;
+
+export type ButtonProps = Partial<ButtonVariants> &
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
+  (
+    | { leadingIcon?: SVGComponent; trailingIcon?: never }
+    | { leadingIcon?: never; trailingIcon?: SVGComponent }
+  );
+
+export type IconButtonProps = Omit<
+  ButtonProps,
+  "rounded" | "leadingIcon" | "trailingIcon" | "children"
+> & {
+  hiddenLabel: string;
+  icon: SVGComponent;
+};
