@@ -1,5 +1,5 @@
 
-Buttons Classification for Project with Class-Variance-Authority
+# Buttons Classification for Project with Class-Variance-Authority
 
 # React + TypeScript + Vite
 
